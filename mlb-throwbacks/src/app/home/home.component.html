@@ -1,0 +1,169 @@
+<div class="videos-container">
+  <!-- Back Arrow Button -->
+  <button (click)="moveLeft()" [disabled]="currentIndex === 0">←</button>
+  
+  <!-- Video Card Section -->
+  <div *ngIf="videos.length > 0" class="video-card">
+    <video controls [src]="videos[currentIndex].url"></video>
+    <h2>{{ videos[currentIndex].title }}</h2>
+
+    <button (click)="enterTriviaMode()" *ngIf="videos[currentIndex]">
+      Start Trivia Mode
+    </button>
+    
+  </div>
+  
+  <!-- Forward Arrow Button -->
+  <button (click)="moveRight()" [disabled]="currentIndex === videos.length - 1">→</button>
+</div>
+
+
+<!-- Pop-up for Trivia -->
+<!-- Pop-up Overlay for Trivia -->
+<div *ngIf="isTriviaMode" class="popup-overlay">
+  <div class="popup-content">
+     <!-- Loading Spinner (Rotating MLB Logo) -->
+     <div *ngIf="isLoading" class="loading-spinner">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Major_League_Baseball_logo.svg/300px-Major_League_Baseball_logo.svg.png"
+        alt="Loading..."
+        class="rotating-logo"
+      />
+      <p>Loading trivia questions...</p>
+    </div>
+    <!-- Trivia Content -->
+    <div class="trivia-content">
+      <h2>Trivia</h2>
+      <div *ngIf="triviaQuestions.length > 0">
+        <h3>Question {{ currentTriviaIndex + 1 }}:</h3>
+        <p>{{ triviaQuestion }}</p>
+
+        <!-- Display Trivia Options in a 2x2 Grid -->
+        <div class="quiz-options-grid">
+          <div class="quiz-option">
+            <span class="option-label">A</span>
+            <button
+              (click)="selectAnswer(triviaOptions[0])"
+              [disabled]="selectedAnswer !== null"
+              [class.selected]="selectedAnswer === triviaOptions[0]"
+              [class.correct]="selectedAnswer !== null && triviaOptions[0] === correctAnswer"
+              [class.incorrect]="selectedAnswer !== null && triviaOptions[0] === selectedAnswer && triviaOptions[0] !== correctAnswer"
+            >
+              {{ triviaOptions[0] }}
+            </button>
+          </div>
+
+          <div class="quiz-option">
+            <span class="option-label">B</span>
+            <button
+              (click)="selectAnswer(triviaOptions[1])"
+              [disabled]="selectedAnswer !== null"
+              [class.selected]="selectedAnswer === triviaOptions[1]"
+              [class.correct]="selectedAnswer !== null && triviaOptions[1] === correctAnswer"
+              [class.incorrect]="selectedAnswer !== null && triviaOptions[1] === selectedAnswer && triviaOptions[1] !== correctAnswer"
+            >
+              {{ triviaOptions[1] }}
+            </button>
+          </div>
+
+          <div class="quiz-option">
+            <span class="option-label">C</span>
+            <button
+              (click)="selectAnswer(triviaOptions[2])"
+              [disabled]="selectedAnswer !== null"
+              [class.selected]="selectedAnswer === triviaOptions[2]"
+              [class.correct]="selectedAnswer !== null && triviaOptions[2] === correctAnswer"
+              [class.incorrect]="selectedAnswer !== null && triviaOptions[2] === selectedAnswer && triviaOptions[2] !== correctAnswer"
+            >
+              {{ triviaOptions[2] }}
+            </button>
+          </div>
+
+          <div class="quiz-option">
+            <span class="option-label">D</span>
+            <button
+              (click)="selectAnswer(triviaOptions[3])"
+              [disabled]="selectedAnswer !== null"
+              [class.selected]="selectedAnswer === triviaOptions[3]"
+              [class.correct]="selectedAnswer !== null && triviaOptions[3] === correctAnswer"
+              [class.incorrect]="selectedAnswer !== null && triviaOptions[3] === selectedAnswer && triviaOptions[3] !== correctAnswer"
+            >
+              {{ triviaOptions[3] }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Feedback on Answer -->
+        <div *ngIf="selectedAnswer !== null" class="feedback">
+          <p>
+            <strong>Your Answer:</strong> {{ selectedAnswer }}
+            <span *ngIf="isAnswerCorrect; else incorrect"> ✅ Correct!</span>
+            <ng-template #incorrect>
+              <span> ❌ Incorrect! The correct answer is: {{ correctAnswer }}</span>
+            </ng-template>
+          </p>
+        </div>
+
+        <!-- Navigation Between Trivia Questions -->
+        <div class="trivia-navigation">
+          <button
+            (click)="previousTriviaQuestion()"
+            [disabled]="currentTriviaIndex === 0"
+          >
+            Previous
+          </button>
+          <button
+            (click)="nextTriviaQuestion()"
+            [disabled]="currentTriviaIndex === triviaQuestions.length - 1"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      <!-- No Trivia Available -->
+      <!--p *ngIf="triviaQuestions.length === 0">No trivia available.</p-->
+    </div>
+  <!-- No Trivia Available -->
+  <button (click)="closeTriviaMode()" class="close-button">Exit</button>
+
+</div>
+
+    <!-- Close Button -->
+ 
+      <!--p>{{ triviaQuestions[currentTriviaIndex]?.triviaQuestion }}</p>
+      
+      < Display Trivia Options >
+      <div *ngFor="let option of triviaQuestions[currentTriviaIndex]?.options" class="trivia-option">
+        <button
+          (click)="selectAnswer(option)"
+          [class.selected]="selectedAnswer === option"
+          [class.correct]="selectedAnswer && option === triviaQuestions[currentTriviaIndex]?.correctAnswer"
+          [class.incorrect]="selectedAnswer && option === selectedAnswer && option !== triviaQuestions[currentTriviaIndex]?.correctAnswer"
+        >
+          {{ option }}
+        </button>
+      </div>
+
+      < Feedback on Answer >
+      <div *ngIf="selectedAnswer !== null" class="feedback">
+        <p *ngIf="isAnswerCorrect" class="correct-feedback">Correct! 🎉</p>
+        <p *ngIf="!isAnswerCorrect" class="incorrect-feedback">
+          Incorrect. The correct answer is {{ triviaQuestions[currentTriviaIndex]?.correctAnswer }}.
+        </p>
+      </div>
+
+      < Navigation Between Trivia Questions >
+      <div class="trivia-navigation">
+        <button (click)="previousTriviaQuestion()" [disabled]="currentTriviaIndex === 0">Previous</button>
+        <button (click)="nextTriviaQuestion()" [disabled]="currentTriviaIndex === triviaQuestions.length - 1">Next</button>
+      </div>
+    </div>
+
+    <Close Button>
+    <button (click)="closeTriviaMode()" class="close-button">Close</button>
+  </div-->
+
+<ng-template #noVideos>
+  <p>No videos available for today.</p>
+</ng-template>

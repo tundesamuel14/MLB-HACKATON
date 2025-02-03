@@ -1,0 +1,319 @@
+.videos-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .video-card {
+    text-align: center;
+  }
+  
+  video {
+    width: 600px;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+
+  .trending-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .arrow-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .arrow-button:hover {
+    color: #555;
+  }
+  
+  .left {
+    margin-right: 500px;
+  }
+  
+  .right {
+    margin-left: 500px;
+  }
+  
+  .top-10 {
+    display: flex;
+    overflow-x: scroll;
+    gap: 0.3px;
+    bottom:75px;
+  }
+  
+  .item {
+    min-width: 500px;
+    max-width: 1500px;
+  }
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    backdrop-filter: blur(5px); /* Blur effect */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  }
+  
+  .trivia-option button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .trivia-option button.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .trivia-option button.correct {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .trivia-option button.incorrect {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .feedback {
+    margin-top: 20px;
+  }
+  
+  .correct-feedback {
+    color: #28a745;
+  }
+  
+  .incorrect-feedback {
+    color: #dc3545;
+  }
+  
+  .close-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .trivia-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .trivia-navigation button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .trivia-navigation button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .selected {
+    background-color: #d3d3d3; /* Gray for selected answer */
+  }
+  
+  .correct {
+    background-color: #90ee90; /* Green for correct answer */
+  }
+  
+  .incorrect {
+    background-color: #ffcccb; /* Red for incorrect answer */
+  }
+  .mlb-logo-container img {
+    animation: rotateLogo 5s linear infinite;
+    max-width: 100px;
+  }
+  /* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rotating-logo {
+  width: 100px;
+  height: 100px;
+  animation: rotate 2s linear infinite; /* Rotate animation */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner p {
+  font-size: 18px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and button */
+  }
+  .option-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    width: 30px;
+    text-align: center;
+  }
+  .quiz-option button {
+    flex: 1;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: white;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .quiz-option button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .quiz-option button.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .quiz-option button.correct {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    animation: correctAnswer 0.5s ease;
+  }
+  .quiz-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 15px; /* Space between options */
+    margin-top: 20px;
+  }
+  
+  
+  .quiz-option button.incorrect {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    animation: incorrectAnswer 0.5s ease;
+  }
+  
+  @keyframes correctAnswer {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes incorrectAnswer {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .feedback {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .feedback span {
+    font-weight: bold;
+  }
+
+  
+  
+  
+  
+  
+ 
+  
