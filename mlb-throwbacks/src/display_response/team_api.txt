@@ -1,0 +1,16 @@
+const fetchHistoricalRecords = async (metric, playerId, teamId, option) => {
+  //let url;
+  console.log()
+  const url = `https://statsapi.mlb.com/api/v1/teams/111`;    
+  const response = await axios.get(url);
+  console.log('teammmm stats Response:', response.data.teams[0].springLeague);
+  return response.data;}
+
+  C:\Users\uzueg>curl http://localhost:3000/api/compare-stats?option=team    
+
+  springLeague: {
+    id: 115,
+    name: 'Grapefruit League',
+    link: '/api/v1/league/115',
+    abbreviation: 'GL'
+  }

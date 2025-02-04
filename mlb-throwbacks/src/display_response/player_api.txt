@@ -1,0 +1,81 @@
+
+player stats Response: [
+  {
+    stat: {
+      gamesPlayed: 18,
+      gamesStarted: 0,
+      groundOuts: 10,
+      airOuts: 12,
+      runs: 5,
+      doubles: 2,
+      triples: 1,
+      homeRuns: 2,
+      strikeOuts: 11,
+      baseOnBalls: 5,
+      intentionalWalks: 0,
+      hits: 16,
+      hitByPitch: 1,
+      avg: '.348',
+      atBats: 46,
+      obp: '.400',
+      slg: '.565',
+      ops: '.965',
+      caughtStealing: 0,
+      stolenBases: 0,
+      stolenBasePercentage: '.---',
+      groundIntoDoublePlay: 1,
+      numberOfPitches: 205,
+      era: '3.86',
+      inningsPitched: '11.2',
+      wins: 1,
+      losses: 0,
+      saves: 0,
+      saveOpportunities: 0,
+      holds: 3,
+      blownSaves: 0,
+      earnedRuns: 5,
+      whip: '1.80',
+      battersFaced: 55,
+      outs: 35,
+      gamesPitched: 18,
+      completeGames: 0,
+      shutouts: 0,
+      strikes: 128,
+      strikePercentage: '.620',
+      hitBatsmen: 1,
+      balks: 0,
+      wildPitches: 0,
+      pickoffs: 0,
+      totalBases: 26,
+      groundOutsToAirouts: '0.83',
+      winPercentage: '1.000',
+      pitchesPerInning: '17.57',
+      gamesFinished: 4,
+      strikeoutWalkRatio: '2.20',
+      strikeoutsPer9Inn: '8.49',
+      walksPer9Inn: '3.86',
+      hitsPer9Inn: '12.34',
+      runsScoredPer9: '3.86',
+      homeRunsPer9: '1.54',
+      inheritedRunners: 16,
+      inheritedRunnersScored: 5,
+      catchersInterference: 0,
+      sacBunts: 0,
+      sacFlies: 3
+    },
+    player: { id: 643297, fullName: 'Cody Ege', link: '/api/v1/people/643297' },
+    sport: { id: 1, link: '/api/v1/sports/1', abbreviation: 'MLB' },
+    gameType: 'R',
+    numTeams: 2,
+    numLeagues: 2
+  }
+]
+
+
+request api url: const fetchHistoricalRecords = async (metric, playerId, teamId, option) => {
+  //let url;
+  console.log()
+  const url = `https://statsapi.mlb.com/api/v1/people/643297/stats?stats=career`;    
+  const response = await axios.get(url);
+  console.log('player stats Response:', response.data.stats[0].splits);
+  return response.data;}

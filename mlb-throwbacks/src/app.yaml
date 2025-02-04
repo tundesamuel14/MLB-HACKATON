@@ -1,0 +1,10 @@
+runtime: nodejs18
+env: standard
+
+handlers:
+  - url: /(.*\.(js|css|png|jpg|ico|json|txt|html))
+    static_files: dist/your-app-name/\1
+    upload: dist/your-app-name/(.*\.(js|css|png|jpg|ico|json|txt|html))
+  - url: /.*
+    static_files: dist/your-app-name/index.html
+    upload: dist/your-app-name/index.html

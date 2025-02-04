@@ -1,0 +1,33 @@
+>node app.js
+Server is running on http://localhost:3000
+API Response for video content: [
+  { items: [ [Object] ], title: 'Extended Highlights' },
+  { items: [ [Object] ], title: 'Daily Recap' }
+]
+^C
+C:\Users\uzueg\OneDrive\Documents\NHL-HACKATON\mlb-throwbacks\src>node app.js
+Server is running on http://localhost:3000
+API Response for video content: {
+  epg: [
+    { title: 'MLBTV', items: [Array] },
+    { title: 'MLBTV-Audio', items: [Array] },
+    { title: 'Audio', items: [] }
+  ],
+  epgAlternate: [
+    { items: [Array], title: 'Extended Highlights' },
+    { items: [Array], title: 'Daily Recap' }
+  ],
+  milestones: null,
+  featuredMedia: { id: 'dodgers-vs-yankees-game-5-highlights-x6987' },
+  freeGame: false,
+  enhancedGame: false,
+  previewStory: {
+    items: [ [Object] ],
+    mlb: {
+      state: 'A',
+      keywordsAll: [],
+      keywordsDisplay: [],
+      dapiURL: 'https://dapi.cms.mlbinfra.com/v2/content/EN-us/stories/gamepreview-gamepk'
+    }
+  }
+}

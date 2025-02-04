@@ -1,0 +1,99 @@
+const fetchMostRecentGames = async () => {
+  let currentDate = new Date(); // Start from today
+  let formattedDate = currentDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+  let gamesFound = false;
+  let attempts = 0; // To prevent infinite loops
+  let mostRecentDate = null;
+  let mappedGames = [];
+
+  while (!gamesFound && attempts < 365) { // Limit to 365 days max
+    const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${formattedDate}`;
+    console.log(`Checking games for: ${formattedDate}`);
+
+    try {
+      const response = await axios.get(url);
+      console.log('API Response for babatunde:', response.data.games);
+      if (response.data.dates && response.data.dates.length > 0) {
+        const games = response.data.dates.flatMap((date) => date.games);
+
+        if (games.length > 0) {
+          gamesFound = true;
+          mostRecentDate = formattedDate;
+          mappedGames = games.map((game) => ({
+            gamePk: game.gamePk,
+            gameDate: game.gameDate,
+            homeTeam: game.teams.home.team.name,
+            awayTeam: game.teams.away.team.name,
+            status: game.status.detailedState,
+            awayTeamId: game.teams.away.team.id,
+            homeTeamId: game.teams.home.team.id,
+            venue: game.venue.name,
+            videoLink: game.content?.link || "No video available",
+          }));
+        }
+      }
+    } catch (error) {
+      console.error(`Error fetching data for ${formattedDate}:`, error.message);
+    }
+
+    if (!gamesFound) {
+      // Go back one day and try again
+      currentDate.setDate(currentDate.getDate() - 1);
+      formattedDate = currentDate.toISOString().split('T')[0];
+      attempts++;
+    }
+  }
+
+  if (!mostRecentDate) {
+    console.log("No recent games found within the past year.");
+    return [];
+  }
+
+  console.log(`Most recent games found on: ${mostRecentDate}`);
+  console.log('Fetched games:', mappedGames);
+  return mappedGames;
+};
+
+//fetchMostRecentGames();
+
+const fetchVideoContent = async () => {
+  const games = await fetchMostRecentGames(); // Fetch games
+
+  if (!games || games.length === 0) {
+    console.log('No games available to fetch video content for.');
+    return;
+  }
+
+  // Only get the first game from the fetched list (the most recent game)
+  const game = games[0]; // Since fetchMostRecentGames returns a list, take the first game
+  const gamePk = game.gamePk; // Extract gamePk from the most recent game
+  console.log(`Fetching video content for gamePk: ${gamePk}`);
+
+
+  //const videoUrl = `https://statsapi.mlb.com/api/v1/game/775296/content`;  // Dynamically use the gamePk
+
+  const videoUrl = `https://statsapi.mlb.com/api/v1/game/${gamePk}/content`;  // Dynamically use the gamePk
+
+
+  try {
+    const response = await axios.get(videoUrl);
+    // this gave long video const media = response.data.media.epgAlternate[0].items[1];
+    // this gave a long videos the first index is longer than second const media = response.data.media.epgAlternate[1].items[0];
+    const media = response.data.media.epgAlternate[1].items[0].playbacks[5];
+    //const featuredVideoId = media.featuredMedia?.id || null;  // Main highlight video
+    //const otherHighlights = response.data.highlights?.highlights?.items || []; // Other highlight clips
+
+    console.log('API Response for video content:',media);
+    if (response.data && response.data) {
+      //console.log('Video content fetched:', media);
+      return response.data.media; // Return media content if available
+    } else {
+      console.log('No media content available for this game.');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching video content:', error);
+    return null;
+  }
+};
+fetchVideoContent()
