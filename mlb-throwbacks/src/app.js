@@ -75,7 +75,7 @@ const fetchMostRecentGames = async () => {
 
 // Function to interact with Gemini API and generate a single trivia question
 /*const generateTriviaQuestion = async (highlightData) => {
-  const apiKey = 'AIzaSyB02haLReTYIP13UjQ8IG1874NAzm7RS_k'; // Replace with your Gemini API key
+  const apiKey = ''; // Replace with your Gemini API key
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
@@ -323,7 +323,7 @@ const compareStats = async (playerStats, option) => {
     return null;
   }
 
-  const apiKey = 'AIzaSyB02haLReTYIP13UjQ8IG1874NAzm7RS_k'; // Replace with your Gemini API key
+  const apiKey = ''; // Replace with your Gemini API key
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
